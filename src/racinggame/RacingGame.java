@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package racing.game;
+package racinggame;
 
 import environment.ApplicationStarter;
+import java.awt.Dimension;
 
 /**
  *
@@ -17,7 +18,7 @@ public class RacingGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ApplicationStarter.run("Change this later", new RaceTrack());
+        ApplicationStarter.run(args, "Change this later", new Dimension(1500, 900), new RaceTrack());
         
     }
     

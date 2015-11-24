@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package racing.game;
+package racinggame;
 
 import environment.Environment;
 import grid.Grid;
@@ -28,9 +28,9 @@ class RaceTrack extends Environment implements CellDataProviderIntf {
 
     public RaceTrack() {
         this.setBackground(Color.red);
-        this.setBackground(ResourceTools.loadImageFromResource("racing.game/racing-game.jpg"));
+        this.setBackground(ResourceTools.loadImageFromResource("racinggame/racing-game.jpg").getScaledInstance(1500, 900, Image.SCALE_SMOOTH));
 
-        grid = new Grid(55, 30, 20, 20, new Point(20, 50), Color.yellow);
+        grid = new Grid(70, 36, 20, 20, new Point(20, 50), new Color(100, 100, 100, 100));
     }
 
     @Override
