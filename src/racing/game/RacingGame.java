@@ -5,6 +5,8 @@
  */
 package racing.game;
 
+import environment.ApplicationStarter;
+
 /**
  *
  * @author LK
@@ -15,7 +17,8 @@ public class RacingGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        ApplicationStarter.run("Change this later", new RaceTrack());
+        
     }
     
 }
