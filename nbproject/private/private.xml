@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/racing/game/CellDataProviderIntf.java</file>
-            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/racing/game/Barriers.java</file>
-            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/racing/game/RacingGame.java</file>
-            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/racing/game/Car.java</file>
-            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/racing/game/RaceTrack.java</file>
+            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/racinggame/RaceTrack.java</file>
+            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/racinggame/Barriers.java</file>
+            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/racinggame/RacingGame.java</file>
+            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/racinggame/Car.java</file>
         </group>
     </open-files>
 </project-private>
