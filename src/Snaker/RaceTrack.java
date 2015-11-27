@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package racinggame;
+package Snaker;
 
 import environment.Environment;
 import grid.Grid;
@@ -70,6 +70,11 @@ class RaceTrack extends Environment implements CellDataProviderIntf {
 
     @Override
     public void timerTaskHandler() {
+        if (fang != null) {
+            fang.move();
+            checkIntersections();
+            
+        }
     }
 
     @Override

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package racinggame;
+package Snaker;
 
 import environment.ApplicationStarter;
 import java.awt.Dimension;
@@ -12,7 +12,7 @@ import java.awt.Dimension;
  *
  * @author LK
  */
-public class RacingGame {
+public class Snaker {
 
     /**
      * @param args the command line arguments
