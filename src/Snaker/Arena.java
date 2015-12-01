@@ -76,10 +76,22 @@ class Arena extends Environment implements CellDataProviderIntf {
 
     }
 
+    
+    private int moveDelay = 0 ;
+    private int moveDelayLimit =3;
+
+    
+    
     @Override
     public void timerTaskHandler() {
         if (cars != null) {
-            cars.move();
+            if (moveDelay >= moveDelayLimit) {
+                cars.move();
+                moveDelay = 0;
+            } else {
+                moveDelay++;
+            }
+            
         }
     }
 
