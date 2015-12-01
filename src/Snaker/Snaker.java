@@ -18,7 +18,7 @@ public class Snaker {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ApplicationStarter.run(args, "Change this later", new Dimension(1500, 900), new RaceTrack());
+        ApplicationStarter.run(args, "Change this later", new Dimension(1500, 900), new Arena());
         
     }
     

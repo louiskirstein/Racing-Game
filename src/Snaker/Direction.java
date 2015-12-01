@@ -9,6 +9,6 @@ package Snaker;
  *
  * @author LK
  */
-class Car {
-    
+public enum Direction {
+    LEFT, RIGHT, UP, DOWN
 }

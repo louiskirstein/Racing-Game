@@ -21,20 +21,28 @@ import java.util.ArrayList;
  *
  * @author LK
  */
-class RaceTrack extends Environment implements CellDataProviderIntf {
+class Arena extends Environment implements CellDataProviderIntf {
 
     private Grid grid;
-    private Car R8;
-    private ArrayList<Barrier> barriers;
+    
+    private Barriers barriers;
+    private Snake cars;
     
 
-    public RaceTrack() {
+    public Arena() {
         this.setBackground(Color.red);
-        this.setBackground(ResourceTools.loadImageFromResource("racinggame/racing-game.jpg").getScaledInstance(1500, 900, Image.SCALE_SMOOTH));
+        this.setBackground(ResourceTools.loadImageFromResource("Snaker/racing-game.jpg").getScaledInstance(1500, 900, Image.SCALE_SMOOTH));
 
         grid = new Grid(70, 36, 20, 20, new Point(20, 50), new Color(100, 100, 100, 100));
         
-        barriers = new ArrayList<>();
+        ArrayList<Point> body = new ArrayList<>();
+        body.add(new Point(35, 10));
+        body.add(new Point(35, 11));
+        body.add(new Point(35, 12));
+        
+        cars = new Snake(body, Direction.LEFT, this);
+        
+        barriers = new Barriers();
         barriers.add(new Barrier(10, 15,  Color.BLUE, this));
         barriers.add(new Barrier(11, 15,  Color.BLUE, this));
         barriers.add(new Barrier(12, 15,  Color.BLUE, this));
@@ -59,8 +67,8 @@ class RaceTrack extends Environment implements CellDataProviderIntf {
         barriers.add(new Barrier(27, 19,  Color.BLUE, this));
         barriers.add(new Barrier(27, 20,  Color.BLUE, this));
         
-        
-         
+        barriers.addBarrierRange(28, 20, 50, 20, Color.yellow, this);
+  
     }
 
     @Override
@@ -70,11 +78,7 @@ class RaceTrack extends Environment implements CellDataProviderIntf {
 
     @Override
     public void timerTaskHandler() {
-        if (fang != null) {
-            fang.move();
-            checkIntersections();
-            
-        }
+       
     }
 
     @Override
@@ -110,10 +114,12 @@ class RaceTrack extends Environment implements CellDataProviderIntf {
 
         }
         
+        if (cars != null) {
+            cars.draw(graphics);
+        }
+        
         if (barriers != null) {
-            for (int i = 0; i < barriers.size(); i++) {
-                barriers.get(i).draw(graphics);
-            }
+            barriers.draw(graphics);
         }
     }
 
