@@ -16,6 +16,30 @@ import java.util.ArrayList;
  */
 class Snake {
     
+    
+    public void move(){
+        // make a copy of the snakes head
+        Point newHead = new Point(getHead());
+        
+        // move the new head, based on the current direction
+        if (direction == Direction.LEFT) {
+            newHead.x--;
+        } else if (direction == Direction.RIGHT) {
+            newHead.x++;
+        } else if (direction == Direction.UP) {
+            newHead.y--;
+        } else if (direction == Direction.DOWN) {
+            newHead.y++;
+        }
+        
+        // add the new head to the snakes body
+        body.add(HEAD_POSITION, newHead);
+        
+        // remove the tail of snake
+        body.remove(body.size() - 1);
+        
+    }
+    
     public void draw(Graphics graphics){
         for (Point location : body) {
             graphics.setColor(Color.GREEN);
@@ -36,6 +60,12 @@ class Snake {
     private ArrayList<Point> body;
     private Direction direction;
     private CellDataProviderIntf cellData;
+    
+    private static final int HEAD_POSITION = 0;
+    
+    private Point getHead() {
+        return body.get(HEAD_POSITION);
+    }
     
     /**
      * @return the body
@@ -78,5 +108,7 @@ class Snake {
     public void setCellData(CellDataProviderIntf cellData) {
         this.cellData = cellData;
     }
+    
 //</editor-fold>
+
 }

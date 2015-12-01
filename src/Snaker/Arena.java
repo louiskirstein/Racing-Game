@@ -78,23 +78,22 @@ class Arena extends Environment implements CellDataProviderIntf {
 
     @Override
     public void timerTaskHandler() {
-       
+        if (cars != null) {
+            cars.move();
+        }
     }
 
     @Override
     public void keyPressedHandler(KeyEvent e) {
         
-        if(e.getKeyCode() == KeyEvent.VK_D) {
-            System.out.println("right");
-        }
-        if(e.getKeyCode() == KeyEvent.VK_A){
-            System.out.println("left");
-        }
-        if(e.getKeyCode() == KeyEvent.VK_W){
-            System.out.println("up");
-        }
-        if(e.getKeyCode() == KeyEvent.VK_S){
-            System.out.println("down");
+        if (e.getKeyCode() == KeyEvent.VK_D) {
+            cars.setDirection(Direction.RIGHT);
+        } else if (e.getKeyCode() == KeyEvent.VK_A){
+            cars.setDirection(Direction.LEFT);
+        } else if (e.getKeyCode() == KeyEvent.VK_W){
+            cars.setDirection(Direction.UP);
+        } else if (e.getKeyCode() == KeyEvent.VK_S){
+            cars.setDirection(Direction.DOWN);
         }
         
     }
@@ -111,7 +110,6 @@ class Arena extends Environment implements CellDataProviderIntf {
     public void paintEnvironment(Graphics graphics) {
         if (grid != null) {
             grid.paintComponent(graphics);
-
         }
         
         if (cars != null) {
