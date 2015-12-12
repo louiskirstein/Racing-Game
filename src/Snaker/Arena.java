@@ -5,6 +5,7 @@
  */
 package Snaker;
 
+import audio.AudioPlayer;
 import environment.Environment;
 import grid.Grid;
 import images.ResourceTools;
@@ -16,7 +17,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-
 /**
  *
  * @author LK
@@ -24,51 +24,50 @@ import java.util.ArrayList;
 class Arena extends Environment implements CellDataProviderIntf {
 
     private Grid grid;
-    
+
     private Barriers barriers;
     private Snake cars;
-    
 
     public Arena() {
-        this.setBackground(Color.red);
+
         this.setBackground(ResourceTools.loadImageFromResource("Snaker/racing-game.jpg").getScaledInstance(1500, 900, Image.SCALE_SMOOTH));
 
         grid = new Grid(70, 36, 20, 20, new Point(20, 50), new Color(100, 100, 100, 100));
-        
+
         ArrayList<Point> body = new ArrayList<>();
         body.add(new Point(35, 10));
         body.add(new Point(35, 11));
         body.add(new Point(35, 12));
+        body.add(new Point(35, 13));
         
+
         cars = new Snake(body, Direction.LEFT, this);
-        
+
         barriers = new Barriers();
-        barriers.add(new Barrier(10, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(11, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(12, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(13, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(14, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(15, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(16, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(17, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(18, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(19, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(20, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(21, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(22, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(23, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(24, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(25, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(26, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(27, 15,  Color.BLUE, this));
-        barriers.add(new Barrier(27, 16,  Color.BLUE, this));
-        barriers.add(new Barrier(27, 17,  Color.BLUE, this));
-        barriers.add(new Barrier(27, 18,  Color.BLUE, this));
-        barriers.add(new Barrier(27, 19,  Color.BLUE, this));
-        barriers.add(new Barrier(27, 20,  Color.BLUE, this));
-        
-        barriers.addBarrierRange(28, 20, 50, 20, Color.yellow, this);
-  
+        //edges
+        barriers.addBarrierRange(0, 0, 0, 35, Color.GRAY, this);
+        barriers.addBarrierRange(0, 0, 69, 0, Color.GRAY, this);
+        barriers.addBarrierRange(69, 0, 69, 35, Color.GRAY, this);
+        barriers.addBarrierRange(0, 35, 69, 35, Color.GRAY, this);
+        //Path 
+        barriers.addBarrierRange(20, 4, 30, 4, Color.GRAY, this);
+        barriers.addBarrierRange(20, 4, 20, 10, Color.GRAY, this);
+        barriers.addBarrierRange(5, 10, 20, 10, Color.GRAY, this);
+        barriers.addBarrierRange(16, 0, 16, 5, Color.GRAY, this);
+        barriers.addBarrierRange(0, 35, 69, 35, Color.GRAY, this);
+
+    }
+
+    public void checkIntersections() {
+
+        for (Barrier barrier : barriers.getBarriers()) {
+            if (barrier.getLocation().equals(cars.getHead())) {
+                
+                cars.addHealth(-1000);
+
+            }
+        }
+
     }
 
     @Override
@@ -76,12 +75,9 @@ class Arena extends Environment implements CellDataProviderIntf {
 
     }
 
-    
-    private int moveDelay = 0 ;
-    private int moveDelayLimit =3;
+    private int moveDelay = 0;
+    private int moveDelayLimit = 3;
 
-    
-    
     @Override
     public void timerTaskHandler() {
         if (cars != null) {
@@ -91,23 +87,26 @@ class Arena extends Environment implements CellDataProviderIntf {
             } else {
                 moveDelay++;
             }
-            
+            checkIntersections();
         }
     }
 
     @Override
     public void keyPressedHandler(KeyEvent e) {
-        
+
         if (e.getKeyCode() == KeyEvent.VK_D) {
             cars.setDirection(Direction.RIGHT);
-        } else if (e.getKeyCode() == KeyEvent.VK_A){
+        } else if (e.getKeyCode() == KeyEvent.VK_A) {
             cars.setDirection(Direction.LEFT);
-        } else if (e.getKeyCode() == KeyEvent.VK_W){
+        } else if (e.getKeyCode() == KeyEvent.VK_W) {
             cars.setDirection(Direction.UP);
-        } else if (e.getKeyCode() == KeyEvent.VK_S){
+        } else if (e.getKeyCode() == KeyEvent.VK_S) {
             cars.setDirection(Direction.DOWN);
+            
+        }else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            AudioPlayer.play("/Snaker/car_sound.wav");
+
         }
-        
     }
 
     @Override
@@ -123,17 +122,16 @@ class Arena extends Environment implements CellDataProviderIntf {
         if (grid != null) {
             grid.paintComponent(graphics);
         }
-        
+
         if (cars != null) {
             cars.draw(graphics);
         }
-        
+
         if (barriers != null) {
             barriers.draw(graphics);
         }
     }
 
-    
     @Override
     public int getCellWidth() {
         return grid.getCellWidth();
@@ -152,7 +150,7 @@ class Arena extends Environment implements CellDataProviderIntf {
     @Override
     public int getSystemCoordY(int x, int y) {
         return grid.getCellSystemCoordinate(x, y).y;
-        
+
     }
 
 }

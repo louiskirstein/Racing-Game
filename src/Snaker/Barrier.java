@@ -7,6 +7,7 @@ package Snaker;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 
 
 /**
@@ -38,6 +39,9 @@ public class Barrier {
     private boolean breakable = false;
     private CellDataProviderIntf cellData;
     
+    public Point getLocation(){
+        return new Point(x, y);
+    }
     
     public int getX(){
         return x;
