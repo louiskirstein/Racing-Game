@@ -27,6 +27,7 @@ class Arena extends Environment implements CellDataProviderIntf {
 
     private Barriers barriers;
     private Snake cars;
+    private ArrayList<Item> items;
 
     public Arena() {
 
@@ -55,6 +56,16 @@ class Arena extends Environment implements CellDataProviderIntf {
         barriers.addBarrierRange(5, 10, 20, 10, Color.GRAY, this);
         barriers.addBarrierRange(16, 0, 16, 5, Color.GRAY, this);
         barriers.addBarrierRange(0, 35, 69, 35, Color.GRAY, this);
+        
+        items = new ArrayList<>();
+        items.add(new Item(10, 5, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car_1.png"), this));
+        items.add(new Item(20, 30, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car_1.png"), this));
+        items.add(new Item(40, 20, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car_1.png"), this));
+        items.add(new Item(55, 25, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car_1.png"), this));
+        
+        
+        
+        
 
     }
 
@@ -129,6 +140,12 @@ class Arena extends Environment implements CellDataProviderIntf {
 
         if (barriers != null) {
             barriers.draw(graphics);
+        }
+        if (items!= null){
+            for (int i = 0; i < items.size(); i++) {
+                items.get(i).draw(graphics);
+                
+            }
         }
     }
 
