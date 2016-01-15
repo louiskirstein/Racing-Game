@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author LK
  */
-class Snake {
+class Car {
 
     public void move() {
         if (isAlive()) {
@@ -49,7 +49,7 @@ class Snake {
         }
     }
 
-    public Snake(ArrayList<Point> body, Direction direction, CellDataProviderIntf cellData) {
+    public Car(ArrayList<Point> body, Direction direction, CellDataProviderIntf cellData) {
         this.body = body;
         this.direction = direction;
         this.cellData = cellData;

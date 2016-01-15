@@ -26,7 +26,7 @@ class Arena extends Environment implements CellDataProviderIntf {
     private Grid grid;
 
     private Barriers barriers;
-    private Snake cars;
+    private Car cars;
     private ArrayList<Item> items;
 
     public Arena() {
@@ -42,7 +42,7 @@ class Arena extends Environment implements CellDataProviderIntf {
         body.add(new Point(35, 13));
         
 
-        cars = new Snake(body, Direction.LEFT, this);
+        cars = new Car(body, Direction.LEFT, this);
 
         barriers = new Barriers();
         //edges
@@ -50,18 +50,13 @@ class Arena extends Environment implements CellDataProviderIntf {
         barriers.addBarrierRange(0, 0, 69, 0, Color.GRAY, this);
         barriers.addBarrierRange(69, 0, 69, 35, Color.GRAY, this);
         barriers.addBarrierRange(0, 35, 69, 35, Color.GRAY, this);
-        //Path 
-        barriers.addBarrierRange(20, 4, 30, 4, Color.GRAY, this);
-        barriers.addBarrierRange(20, 4, 20, 10, Color.GRAY, this);
-        barriers.addBarrierRange(5, 10, 20, 10, Color.GRAY, this);
-        barriers.addBarrierRange(16, 0, 16, 5, Color.GRAY, this);
-        barriers.addBarrierRange(0, 35, 69, 35, Color.GRAY, this);
+        
         
         items = new ArrayList<>();
-        items.add(new Item(10, 5, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car_1.png"), this));
-        items.add(new Item(20, 30, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car_1.png"), this));
-        items.add(new Item(40, 20, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car_1.png"), this));
-        items.add(new Item(55, 25, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car_1.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car_1.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car_1.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car_1.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car_1.png"), this));
         
         
         
@@ -80,6 +75,11 @@ class Arena extends Environment implements CellDataProviderIntf {
         }
 
     }
+    public int random(int value)    {
+    return (int) (Math.random() * value);
+    
+}
+    
 
     @Override
     public void initializeEnvironment() {

@@ -12,7 +12,7 @@ import java.awt.Dimension;
  *
  * @author LK
  */
-public class Snaker {
+public class Racer {
 
     /**
      * @param args the command line arguments
