@@ -53,10 +53,10 @@ class Arena extends Environment implements CellDataProviderIntf {
         
         
         items = new ArrayList<>();
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car_1.png"), this));
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car_1.png"), this));
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car_1.png"), this));
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car_1.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/golden_apple.jpg"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/golden_apple.jpg"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/golden_apple.jpg"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/train_symbol.jpg"), this));
         
         
         
