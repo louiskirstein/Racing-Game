@@ -31,7 +31,7 @@ class Arena extends Environment implements CellDataProviderIntf {
 
     public Arena() {
 
-        this.setBackground(ResourceTools.loadImageFromResource("Snaker/racing-game.jpg").getScaledInstance(1500, 900, Image.SCALE_SMOOTH));
+        this.setBackground(ResourceTools.loadImageFromResource("Snaker/needforspeed.jpg").getScaledInstance(1500, 900, Image.SCALE_SMOOTH));
 
         grid = new Grid(70, 36, 20, 20, new Point(20, 50), new Color(100, 100, 100, 100));
 
@@ -46,17 +46,18 @@ class Arena extends Environment implements CellDataProviderIntf {
 
         barriers = new Barriers();
         //edges
-        barriers.addBarrierRange(0, 0, 0, 35, Color.GRAY, this);
-        barriers.addBarrierRange(0, 0, 69, 0, Color.GRAY, this);
-        barriers.addBarrierRange(69, 0, 69, 35, Color.GRAY, this);
-        barriers.addBarrierRange(0, 35, 69, 35, Color.GRAY, this);
+        barriers.addBarrierRange(0, 0, 0, 35, Color.black, this);
+        barriers.addBarrierRange(0, 0, 69, 0, Color.black, this);
+        barriers.addBarrierRange(69, 0, 69, 35, Color.black, this);
+        barriers.addBarrierRange(0, 35, 69, 35, Color.black, this);
+        
         
         
         items = new ArrayList<>();
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/golden_apple.jpg"), this));
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/golden_apple.jpg"), this));
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/golden_apple.jpg"), this));
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/train_symbol.jpg"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/golden_apple.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/golden_apple.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/golden_apple.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car.png"), this));
         
         
         
@@ -113,6 +114,8 @@ class Arena extends Environment implements CellDataProviderIntf {
             cars.setDirection(Direction.UP);
         } else if (e.getKeyCode() == KeyEvent.VK_S) {
             cars.setDirection(Direction.DOWN);
+        } else if (e.getKeyCode() == KeyEvent.VK_G) {
+            cars.addGrowthCounter(1);
             
         }else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             AudioPlayer.play("/Snaker/car_sound.wav");

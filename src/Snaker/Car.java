@@ -36,7 +36,20 @@ class Car {
             body.add(HEAD_POSITION, newHead);
 
             // remove the tail of snake
+            // if the growthCounter is greater than zero
+            // do NOT remove the tail
+            // subtract one from the growthCounter 
+            //else (the growthCounter is less than or equal to zero
+            // delete the tail
+            if (growthCounter > 0) {
+                growthCounter-- ;
+                
+            }
+            else {
+                
+            
             body.remove(body.size() - 1);
+            }
         }
     }
 
@@ -64,6 +77,7 @@ class Car {
 
     private int health = 100;
 
+    private int growthCounter; 
 
     public Point getHead() {
         return getBody().get(HEAD_POSITION);
@@ -129,5 +143,24 @@ class Car {
         return (health > 0);
     }
 //</editor-fold>
+
+    /**
+     * @return the growthCounter
+     */
+    public int getGrowthCounter() {
+        return growthCounter;
+    }
+
+    /**
+     * @param growthCounter the growthCounter to set
+     */
+    public void setGrowthCounter(int growthCounter) {
+        this.growthCounter = growthCounter;
+    }
+    
+    //growth to add to the snake
+    public void addGrowthCounter(int growth) {
+        this.growthCounter += growth;
+    }
 
 }
