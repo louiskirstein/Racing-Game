@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Snaker;
+package Racer;
 
 import audio.AudioPlayer;
 import environment.Environment;
@@ -32,7 +32,7 @@ class Arena extends Environment implements CellDataProviderIntf {
 
     public Arena() {
 
-        this.setBackground(ResourceTools.loadImageFromResource("Snaker/needforspeed.jpg").getScaledInstance(1500, 900, Image.SCALE_SMOOTH));
+        this.setBackground(ResourceTools.loadImageFromResource("Racer/needforspeed.jpg").getScaledInstance(1500, 900, Image.SCALE_SMOOTH));
 
         grid = new Grid(70, 36, 20, 20, new Point(20, 50), new Color(100, 100, 100, 100));
 
@@ -55,11 +55,11 @@ class Arena extends Environment implements CellDataProviderIntf {
         
         
         items = new ArrayList<>();
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/gas_station.png"), this));
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/gas_station.png"), this));
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/gas_station.png"), this));
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car.png"), this));
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/electro_car.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Racer/car.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Racer/electro_car.png"), this));
 
         
         
@@ -124,7 +124,7 @@ class Arena extends Environment implements CellDataProviderIntf {
             cars.addGrowthCounter(1);
             
         }else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            AudioPlayer.play("/Snaker/car_sound.wav");
+            AudioPlayer.play("/Racer/car_sound.wav");
 
         }
     }

@@ -3,12 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/Snaker/Item.java</file>
-            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/Snaker/Barrier.java</file>
-            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/Snaker/Arena.java</file>
-            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/Snaker/Car.java</file>
-            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/Snaker/Racer.java</file>
-            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/Snaker/Barriers.java</file>
+            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/Racer/Arena.java</file>
+            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/Racer/Barriers.java</file>
+            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/Racer/Item.java</file>
+            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/Racer/Car.java</file>
+            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/Racer/Racer.java</file>
+            <file>file:/Users/LK/NetBeansProjects/Racing%20Game/src/Racer/Barrier.java</file>
         </group>
     </open-files>
 </project-private>
