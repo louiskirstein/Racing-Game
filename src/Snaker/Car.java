@@ -55,7 +55,7 @@ class Car {
 
     public void draw(Graphics graphics) {
         for (Point location : body) {
-            graphics.setColor(Color.GREEN);
+            graphics.setColor(Color.RED);
             graphics.fillOval(cellData.getSystemCoordX(location.x, location.y),
                     cellData.getSystemCoordY(location.x, location.y),
                     cellData.getCellWidth(), cellData.getCellHeight());

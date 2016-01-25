@@ -10,6 +10,7 @@ import environment.Environment;
 import grid.Grid;
 import images.ResourceTools;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -54,16 +55,21 @@ class Arena extends Environment implements CellDataProviderIntf {
         
         
         items = new ArrayList<>();
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/golden_apple.png"), this));
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/golden_apple.png"), this));
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/golden_apple.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/gas_station.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/gas_station.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/gas_station.png"), this));
         items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/car.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Snaker/electro_car.png"), this));
+
         
         
         
         
 
     }
+    
+        
+    
 
     public void checkIntersections() {
 
@@ -150,6 +156,9 @@ class Arena extends Environment implements CellDataProviderIntf {
                 
             }
         }
+        graphics.setColor(Color.red);
+        graphics.setFont(new Font("Calibri", Font.BOLD, 30));
+        graphics.drawString("Change Later", 600, 35);
     }
 
     @Override
@@ -172,5 +181,8 @@ class Arena extends Environment implements CellDataProviderIntf {
         return grid.getCellSystemCoordinate(x, y).y;
 
     }
+    
+    
+    
 
 }
