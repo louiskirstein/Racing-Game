@@ -81,6 +81,22 @@ class Car {
 
     public Point getHead() {
         return getBody().get(HEAD_POSITION);
+       
+    }
+    
+    public boolean selfHit(){
+        return getTail().contains(getHead());
+    }
+
+    /**
+     * @return the tail
+     */
+    public ArrayList<Point> getTail() {
+        ArrayList<Point> tail = new ArrayList<>();
+        for (int i = 1; i < this.body.size(); i++) {
+            tail.add(body.get(i));
+        }
+        return tail;
     }
 
     /**

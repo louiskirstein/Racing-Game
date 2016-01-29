@@ -29,7 +29,9 @@ class Arena extends Environment implements CellDataProviderIntf {
     private Barriers barriers;
     private Car cars;
     private ArrayList<Item> items;
-
+    private GameState state = GameState.STOPPED;
+    
+    
     public Arena() {
 
         this.setBackground(ResourceTools.loadImageFromResource("Racer/needforspeed.jpg").getScaledInstance(1500, 900, Image.SCALE_SMOOTH));
@@ -58,7 +60,6 @@ class Arena extends Environment implements CellDataProviderIntf {
         items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
         items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
         items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Racer/car.png"), this));
         items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Racer/electro_car.png"), this));
 
         
@@ -79,6 +80,11 @@ class Arena extends Environment implements CellDataProviderIntf {
                 cars.addHealth(-1000);
 
             }
+        }
+        //check if car crashes itself
+        if ((cars != null) && cars.selfHit()) {
+            state = GameState.CRASHED;
+            System.out.println("booooo");
         }
 
     }
