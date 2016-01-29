@@ -6,10 +6,12 @@
 package Racer;
 
 import audio.AudioPlayer;
+import components.HealthBar;
 import environment.Environment;
 import grid.Grid;
 import images.ResourceTools;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -27,9 +29,10 @@ class Arena extends Environment implements CellDataProviderIntf {
     private Grid grid;
 
     private Barriers barriers;
-    private Car cars;
+    private Car car;
     private ArrayList<Item> items;
     private GameState state = GameState.STOPPED;
+    private HealthBar fuelBar;
     
     
     public Arena() {
@@ -45,7 +48,7 @@ class Arena extends Environment implements CellDataProviderIntf {
         body.add(new Point(35, 13));
         
 
-        cars = new Car(body, Direction.LEFT, this);
+        car = new Car(body, Direction.LEFT, this);
 
         barriers = new Barriers();
         //edges
@@ -57,16 +60,14 @@ class Arena extends Environment implements CellDataProviderIntf {
         
         
         items = new ArrayList<>();
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
-        items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "FUEL", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "FUEL", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
+        items.add(new Item(random(68)+1,random(34)+1, "FUEL", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
         items.add(new Item(random(68)+1,random(34)+1, "POWER_UP", ResourceTools.loadImageFromResource("Racer/electro_car.png"), this));
 
         
+        fuelBar = new HealthBar(new Point (10, 10), new Dimension(100, 25), car);
         
-        
-        
-
     }
     
         
@@ -75,18 +76,27 @@ class Arena extends Environment implements CellDataProviderIntf {
     public void checkIntersections() {
 
         for (Barrier barrier : barriers.getBarriers()) {
-            if (barrier.getLocation().equals(cars.getHead())) {
-                
-                cars.addHealth(-1000);
-
+            if (barrier.getLocation().equals(car.getHead())) {
+                car.addHealth(-1000);
             }
         }
+
         //check if car crashes itself
-        if ((cars != null) && cars.selfHit()) {
+        if ((car != null) && car.selfHit()) {
             state = GameState.CRASHED;
             System.out.println("booooo");
+            car.addHealth(-1000);
         }
-
+        
+        if (car != null){
+            for (Item item : items) {
+                if (item.getLocation().equals(car.getHead())) {
+                    if (item.getType().equals("FUEL")) {
+                        car.addFuel(100);
+                    }
+                }
+            }
+        }
     }
     public int random(int value)    {
     return (int) (Math.random() * value);
@@ -104,14 +114,16 @@ class Arena extends Environment implements CellDataProviderIntf {
 
     @Override
     public void timerTaskHandler() {
-        if (cars != null) {
+        if (car != null) {
             if (moveDelay >= moveDelayLimit) {
-                cars.move();
+                car.move();
+                car.addFuel(-1);
                 moveDelay = 0;
             } else {
                 moveDelay++;
             }
             checkIntersections();
+            
         }
     }
 
@@ -119,15 +131,15 @@ class Arena extends Environment implements CellDataProviderIntf {
     public void keyPressedHandler(KeyEvent e) {
 
         if (e.getKeyCode() == KeyEvent.VK_D) {
-            cars.setDirection(Direction.RIGHT);
+            car.setDirection(Direction.RIGHT);
         } else if (e.getKeyCode() == KeyEvent.VK_A) {
-            cars.setDirection(Direction.LEFT);
+            car.setDirection(Direction.LEFT);
         } else if (e.getKeyCode() == KeyEvent.VK_W) {
-            cars.setDirection(Direction.UP);
+            car.setDirection(Direction.UP);
         } else if (e.getKeyCode() == KeyEvent.VK_S) {
-            cars.setDirection(Direction.DOWN);
+            car.setDirection(Direction.DOWN);
         } else if (e.getKeyCode() == KeyEvent.VK_G) {
-            cars.addGrowthCounter(1);
+            car.addGrowthCounter(1);
             
         }else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             AudioPlayer.play("/Racer/car_sound.wav");
@@ -149,8 +161,8 @@ class Arena extends Environment implements CellDataProviderIntf {
             grid.paintComponent(graphics);
         }
 
-        if (cars != null) {
-            cars.draw(graphics);
+        if (car != null) {
+            car.draw(graphics);
         }
 
         if (barriers != null) {
@@ -165,6 +177,11 @@ class Arena extends Environment implements CellDataProviderIntf {
         graphics.setColor(Color.red);
         graphics.setFont(new Font("Calibri", Font.BOLD, 30));
         graphics.drawString("Change Later", 600, 35);
+        
+        if (fuelBar != null) {
+            fuelBar.draw(graphics);
+            
+        }
     }
 
     @Override

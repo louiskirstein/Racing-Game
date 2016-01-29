@@ -5,6 +5,7 @@
  */
 package Racer;
 
+import components.HealthProviderIntf;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  *
  * @author LK
  */
-class Car {
+class Car implements HealthProviderIntf {
 
     public void move() {
         if (isAlive()) {
@@ -72,6 +73,9 @@ class Car {
     private ArrayList<Point> body;
     private Direction direction;
     private CellDataProviderIntf cellData;
+
+    private int maxFuel = 100;
+    private int fuel;
 
     private static final int HEAD_POSITION = 0;
 
@@ -158,7 +162,6 @@ class Car {
     public boolean isAlive() {
         return (health > 0);
     }
-//</editor-fold>
 
     /**
      * @return the growthCounter
@@ -178,5 +181,72 @@ class Car {
     public void addGrowthCounter(int growth) {
         this.growthCounter += growth;
     }
+
+    /**
+     * @return the maxFuel
+     */
+    public int getMaxFuel() {
+        return maxFuel;
+    }
+
+    /**
+     * @param maxFuel the maxFuel to set
+     */
+    public void setMaxFuel(int maxFuel) {
+        this.maxFuel = maxFuel;
+    }
+    
+
+    /**
+     * @return the fuel
+     */
+    public int getFuel() {
+        return fuel;
+    }
+
+    /**
+     * @param fuel the fuel to set
+     */
+    public void setFuel(int fuel) {
+        this.fuel = fuel;
+    }
+
+    /**
+     * @param fuel the fuel to set
+     */
+    public void addFuel(int fuel) {
+        this.fuel += fuel;
+        if (this.fuel > maxFuel) {
+            this.fuel = maxFuel;
+        }
+    }
+//</editor-fold>
+    
+//<editor-fold defaultstate="collapsed" desc="HealthProviderIntf">
+    @Override
+    public int getMinimumHealth() {
+        return 0;
+    }
+    
+    @Override
+    public int getMaximumHealth() {
+        return getMaxFuel();
+    }
+    
+    @Override
+    public int getValue() {
+        return getFuel();
+    }
+    
+    @Override
+    public double getFractionalHealth() {
+        return fuel / maxFuel;
+    }
+    
+    @Override
+    public double getPercentHealth() {
+        return 100 * fuel / maxFuel;
+    }
+//</editor-fold>
 
 }

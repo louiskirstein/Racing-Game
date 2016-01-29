@@ -7,6 +7,7 @@ package Racer;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 
 /**
  *
@@ -40,6 +41,13 @@ public class Item {
     private CellDataProviderIntf cellData;
 
 //<editor-fold defaultstate="collapsed" desc="properties">
+    /**
+     * @return the x
+     */
+    public Point getLocation() {
+        return new Point(x, y);
+    }
+    
     /**
      * @return the x
      */
