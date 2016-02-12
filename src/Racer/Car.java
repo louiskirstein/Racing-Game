@@ -74,7 +74,7 @@ class Car implements HealthProviderIntf {
     private Direction direction;
     private CellDataProviderIntf cellData;
 
-    private int maxFuel = 100;
+    private int maxFuel = 200;
     private int fuel;
 
     private static final int HEAD_POSITION = 0;
