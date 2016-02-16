@@ -60,10 +60,12 @@ class Arena extends Environment implements CellDataProviderIntf {
         barriers.addBarrierRange(0, 35, 69, 35, Color.black, this);
 
         items = new ArrayList<>();
-        items.add(new Item(random(68) + 1, random(34) + 1, "FUEL", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
-        items.add(new Item(random(68) + 1, random(34) + 1, "FUEL", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
-        items.add(new Item(random(68) + 1, random(34) + 1, "FUEL", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
+//        items.add(new Item(random(68) + 1, random(34) + 1, "FUEL", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
+//        items.add(new Item(random(68) + 1, random(34) + 1, "FUEL", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
+//        items.add(new Item(random(68) + 1, random(34) + 1, "FUEL", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
 
+        items.add(new Item(randomGridLocation(), Item.ITEM_TYPE_POWER_UP, ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
+        
         fuelBar = new HealthBar(new Point(60, 9), new Dimension(200, 30), car);
 
         setState(GameState.RUNNING);
@@ -71,6 +73,14 @@ class Arena extends Environment implements CellDataProviderIntf {
         //setUpSound
         soundManager = MySoundManager.getSoundManager();
 
+    }
+    
+    public int randomInt(int min, int max) {
+        return (int) (min + (Math.random() * (max - min + 1)));
+    }
+    
+    public Point randomGridLocation() {
+        return new Point(randomInt(1, grid.getColumns()-2), randomInt(1, grid.getRows()-2));
     }
 
     public void checkIntersections() {
@@ -85,8 +95,9 @@ class Arena extends Environment implements CellDataProviderIntf {
         if (car != null) {
             for (Item item : items) {
                 if (item.getLocation().equals(car.getHead())) {
-                    if (item.getType().equals("FUEL")) {
+                    if (item.getType().equals(Item.ITEM_TYPE_POWER_UP)) {
                         car.addFuel(50);
+                        item.setLocation(randomGridLocation());
                     }
                 }
             }
@@ -134,6 +145,8 @@ class Arena extends Environment implements CellDataProviderIntf {
             
             checkIntersections();
         }
+        
+        
     }
 
     @Override
@@ -198,9 +211,8 @@ class Arena extends Environment implements CellDataProviderIntf {
         }
 
         if (items != null) {
-            for (int i = 0; i < items.size(); i++) {
-                items.get(i).draw(graphics);
-
+            for (Item item : items) {
+                item.draw(graphics);
             }
         }
 
