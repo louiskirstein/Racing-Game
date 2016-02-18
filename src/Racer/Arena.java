@@ -34,8 +34,6 @@ class Arena extends Environment implements CellDataProviderIntf {
     private GameState state = GameState.STOPPED;
     private HealthBar fuelBar;
     private MySoundManager soundManager;
-    
-
 
     public Arena() {
 
@@ -60,27 +58,28 @@ class Arena extends Environment implements CellDataProviderIntf {
         barriers.addBarrierRange(0, 35, 69, 35, Color.black, this);
 
         items = new ArrayList<>();
-//        items.add(new Item(random(68) + 1, random(34) + 1, "FUEL", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
-//        items.add(new Item(random(68) + 1, random(34) + 1, "FUEL", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
-//        items.add(new Item(random(68) + 1, random(34) + 1, "FUEL", ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
 
-        items.add(new Item(randomGridLocation(), Item.ITEM_TYPE_POWER_UP, ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
-        
+        for (int i = 0; i < 2; i++) {
+            items.add(new Item(randomGridLocation(), Item.ITEM_TYPE_FUEL, ResourceTools.loadImageFromResource("Racer/gas_station.png"), this));
+            items.add(new Item(randomGridLocation(), Item.ITEM_TYPE_POWER_UP, ResourceTools.loadImageFromResource("Racer/speedometer.jpeg"), this));
+
+        }
+
         fuelBar = new HealthBar(new Point(60, 9), new Dimension(200, 30), car);
 
         setState(GameState.RUNNING);
-        
+
         //setUpSound
         soundManager = MySoundManager.getSoundManager();
 
     }
-    
+
     public int randomInt(int min, int max) {
         return (int) (min + (Math.random() * (max - min + 1)));
     }
-    
+
     public Point randomGridLocation() {
-        return new Point(randomInt(1, grid.getColumns()-2), randomInt(1, grid.getRows()-2));
+        return new Point(randomInt(1, grid.getColumns() - 2), randomInt(1, grid.getRows() - 2));
     }
 
     public void checkIntersections() {
@@ -95,9 +94,23 @@ class Arena extends Environment implements CellDataProviderIntf {
         if (car != null) {
             for (Item item : items) {
                 if (item.getLocation().equals(car.getHead())) {
-                    if (item.getType().equals(Item.ITEM_TYPE_POWER_UP)) {
+                    if (item.getType().equals(Item.ITEM_TYPE_FUEL)) {
+                        AudioPlayer.play("/Racer/car_sound.wav");
                         car.addFuel(50);
                         item.setLocation(randomGridLocation());
+
+                    }
+                }
+            }
+            for (Item item : items) {
+                if (item.getLocation().equals(car.getHead())) {
+                    if (item.getType().equals(Item.ITEM_TYPE_POWER_UP)) {
+                        AudioPlayer.play("/Racer/Power_up_sound.wav");
+                        
+                        car.addGrowthCounter(1);
+                        
+                        item.setLocation(randomGridLocation());
+
                     }
                 }
             }
@@ -133,20 +146,16 @@ class Arena extends Environment implements CellDataProviderIntf {
             if (moveDelay >= moveDelayLimit) {
                 car.move();
                 car.addFuel(-1);
-               
-                
-                
+
                 moveDelay = 0;
             } else {
                 moveDelay++;
-                
-                
+
             }
-            
+
             checkIntersections();
         }
-        
-        
+
     }
 
     @Override
@@ -193,19 +202,6 @@ class Arena extends Environment implements CellDataProviderIntf {
             grid.paintComponent(graphics);
         }
 
-        if (car != null) {
-            car.draw(graphics);
-            if (car.getFuel() < 0 ) {
-                graphics.setFont(new Font("Calibri", Font.BOLD, 80));
-                graphics.drawString("OUT OF FUEL", 500, 400);
-                
-            }
-            if (car.getHealth() < 0 ) {
-                graphics.setFont(new Font("Calibri", Font.BOLD, 80));
-                graphics.drawString("WASTED", 550, 400);
-            }
-        }
-
         if (barriers != null) {
             barriers.draw(graphics);
         }
@@ -225,8 +221,23 @@ class Arena extends Environment implements CellDataProviderIntf {
 
         }
         if (state == GameState.STOPPED) {
+            
             graphics.setFont(new Font("Calibri", Font.BOLD, 100));
             graphics.drawString("PAUSE", 550, 400);
+        }
+        if (car != null) {
+            car.draw(graphics);
+            if (car.getFuel() <= 0) {
+                
+                graphics.setFont(new Font("Calibri", Font.BOLD, 80));
+                graphics.drawString("OUT OF FUEL", 450, 400);
+
+            }
+            if (car.getHealth() < 0) {
+                graphics.setFont(new Font("Calibri", Font.BOLD, 80));
+                
+                graphics.drawString("WASTED", 550, 400);
+            }
         }
     }
 

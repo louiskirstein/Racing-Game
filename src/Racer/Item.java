@@ -50,6 +50,7 @@ public class Item {
     private CellDataProviderIntf cellData;
 
 //<editor-fold defaultstate="collapsed" desc="properties">
+    public static final String ITEM_TYPE_FUEL = "FUEL";
     public static final String ITEM_TYPE_POWER_UP = "POWER_UP";
 
     public Point getLocation() {
