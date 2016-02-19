@@ -64,6 +64,10 @@ class Arena extends Environment implements CellDataProviderIntf {
             items.add(new Item(randomGridLocation(), Item.ITEM_TYPE_POWER_UP, ResourceTools.loadImageFromResource("Racer/speedometer.jpeg"), this));
 
         }
+        for (int i = 0; i < 1; i++) {
+            items.add(new Item(randomGridLocation(), Item.ITEM_TYPE_CAR_UPGRADE, ResourceTools.loadImageFromResource("Racer/Tesla-Symbol.jpeg"), this));
+
+        }
 
         fuelBar = new HealthBar(new Point(60, 9), new Dimension(200, 30), car);
 
@@ -105,14 +109,20 @@ class Arena extends Environment implements CellDataProviderIntf {
             for (Item item : items) {
                 if (item.getLocation().equals(car.getHead())) {
                     if (item.getType().equals(Item.ITEM_TYPE_POWER_UP)) {
-                        AudioPlayer.play("/Racer/Power_up_sound.wav"); 
-                        
+                        AudioPlayer.play("/Racer/Power_up_sound.wav");
+
                         car.addGrowthCounter(1);
-                        
+
                         item.setLocation(randomGridLocation());
 
                     }
                 }
+
+                if (item.getType().equals(Item.ITEM_TYPE_CAR_UPGRADE)) {
+                    
+
+                }
+
             }
 
             for (Barrier barrier : barriers.getBarriers()) {
@@ -221,21 +231,21 @@ class Arena extends Environment implements CellDataProviderIntf {
 
         }
         if (state == GameState.STOPPED) {
-            
+
             graphics.setFont(new Font("Calibri", Font.BOLD, 100));
             graphics.drawString("PAUSE", 550, 400);
         }
         if (car != null) {
             car.draw(graphics);
             if (car.getFuel() <= 0) {
-                
+
                 graphics.setFont(new Font("Calibri", Font.BOLD, 80));
                 graphics.drawString("OUT OF FUEL", 450, 400);
 
             }
             if (car.getHealth() < 0) {
                 graphics.setFont(new Font("Calibri", Font.BOLD, 80));
-                
+
                 graphics.drawString("WASTED", 550, 400);
             }
         }

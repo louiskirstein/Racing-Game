@@ -52,6 +52,7 @@ public class Item {
 //<editor-fold defaultstate="collapsed" desc="properties">
     public static final String ITEM_TYPE_FUEL = "FUEL";
     public static final String ITEM_TYPE_POWER_UP = "POWER_UP";
+    public static final String ITEM_TYPE_CAR_UPGRADE = "CAR_UPGRADE";
 
     public Point getLocation() {
         return new Point(x, y);
