@@ -105,7 +105,7 @@ class Arena extends Environment implements CellDataProviderIntf {
             for (Item item : items) {
                 if (item.getLocation().equals(car.getHead())) {
                     if (item.getType().equals(Item.ITEM_TYPE_POWER_UP)) {
-                        AudioPlayer.play("/Racer/Power_up_sound.wav");
+                        AudioPlayer.play("/Racer/Power_up_sound.wav"); 
                         
                         car.addGrowthCounter(1);
                         
