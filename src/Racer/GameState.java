@@ -10,5 +10,6 @@ package Racer;
  * @author LK
  */
 public enum GameState {
+
     STOPPED, RUNNING, CRASHED
 }
