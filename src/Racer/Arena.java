@@ -100,7 +100,7 @@ class Arena extends Environment implements CellDataProviderIntf {
                 if (item.getLocation().equals(car.getHead())) {
                     if (item.getType().equals(Item.ITEM_TYPE_FUEL)) {
                         AudioPlayer.play("/Racer/car_sound.wav");
-                        car.addFuel(50);
+                        car.addFuel(70);
                         item.setLocation(randomGridLocation());
 
                     }
@@ -119,7 +119,6 @@ class Arena extends Environment implements CellDataProviderIntf {
                 }
 
                 if (item.getType().equals(Item.ITEM_TYPE_CAR_UPGRADE)) {
-                    
 
                 }
 
@@ -224,7 +223,7 @@ class Arena extends Environment implements CellDataProviderIntf {
 
         graphics.setColor(Color.red);
         graphics.setFont(new Font("Calibri", Font.BOLD, 30));
-        graphics.drawString("Change Later", 600, 35);
+        graphics.drawString("Need For Speed", 600, 35);
 
         if (fuelBar != null) {
             fuelBar.draw(graphics);
